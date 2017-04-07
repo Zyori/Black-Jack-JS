@@ -1,0 +1,18 @@
+#playerCards {
+  display: block;
+  clear:both;
+}
+
+#dealerCards {
+  display: block;
+}
+
+#buttons {
+  display: block;
+  clear:both;
+}
+
+#textBar {
+  display: block;
+  clear:both;
+}
