@@ -39,14 +39,31 @@ function isAce(card) {
   }
 }
 
+function score(hand){
+  var score = 0;
+  var aces = [];
+  var aceCount = 0;
+
+  for(counter=0; counter < hand.length; counter++){
+      if(isAce(hand[counter])){ aceCount++;}
+  };
+
+  if(hand.length < 3){
+    score = openingValue(hand[0]) + openingValue(hand[1]);
+  }else{
+    for(var i = 0; i < hand.length; i++){
+      score = score + openingValue(hand[i]);
+    }
+      if(aceCount > 0 && score > 21){ score -= aceCount *10};
+  }
+  return score;
+}
+
 var myDeck = new deck();
 console.log(myDeck);
 
 var dealerHand = new Array();
 var playerHand = new Array();
-
-var playerScore = 0;
-var dealerScore = 0;
 
 document.getElementById("deal").disabled = false;
 document.getElementById("hit").disabled = true;
@@ -76,9 +93,8 @@ $("button#deal").click(function () {
   $("#playerCards").html("<div class=\"card\"> " + playerHand[0].name + playerHand[0].suit + "</div>");
   $("#playerCards").append("<div class=\"card\"> " + playerHand[1].name + playerHand[1].suit + "</div>");
 
-  playerScore = openingValue(playerHand[0]) + openingValue(playerHand[1]);
 
-  $("#textBar").html("You score is " + playerScore + ". Would you like to hit or stay?");
+  $("#textBar").html("You score is " + score(playerHand) + ". Would you like to hit or stay?");
 });
 
 $("button#hit").click(function () {
@@ -88,20 +104,13 @@ $("button#hit").click(function () {
   playerHand.push(nextCard);
   $("#playerCards").append("<div class=\"card\"> " + playerHand[playerHand.length - 1].name + playerHand[playerHand.length - 1].suit + "</div");
 
-  aceCount = 0;
-  for(counter=0; counter < playerHand.length; counter++){
-      if(isAce(playerHand[counter])){ aceCount++;}
-  };
-
-  playerScore += openingValue(playerHand[playerHand.length - 1]);
-
-  if(playerScore > 21 && aceCount == 0){
-    $("#textBar").html("Your score is more than 21, you bust!");
+  if(score(playerHand) <= 21){
+    $("#textBar").html("Your score is " + score(playerHand) + ". Would you like to hit or stay?");
+  }else if(score(playerHand) > 21){
+    $("#textBar").html("Your score is " + score(playerHand) + ", you bust!");
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
   }
-
-  console.log(playerScore);
 
 });
 
