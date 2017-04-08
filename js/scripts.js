@@ -56,6 +56,8 @@ $("button#deal").click(function () {
   document.getElementById("hit").disabled = false;
   document.getElementById("stay").disabled = false;
 
+  var hitCount = 0;
+
   firstCard = myDeck[myDeck.length - 1];
   myDeck.pop();
   secondCard = myDeck[myDeck.length - 1];
@@ -90,6 +92,16 @@ $("button#hit").click(function () {
   for(counter=0; counter < playerHand.length; counter++){
       if(isAce(playerHand[counter])){ aceCount++;}
   };
+
+  playerScore += openingValue(playerHand[playerHand.length - 1]);
+
+  if(playerScore > 21 && aceCount == 0){
+    $("#textBar").html("Your score is more than 21, you bust!");
+    document.getElementById("hit").disabled = true;
+    document.getElementById("stay").disabled = true;
+  }
+
+  console.log(playerScore);
 
 });
 
