@@ -93,5 +93,15 @@ $("button#hit").click(function () {
 
 });
 
+$("button#stay").click(function () {
+  document.getElementById("hit").disabled = true;
+  document.getElementById("stay").disabled = true;
+
+  $("#dealerCards").html("<div class=\"card\"> " + dealerHand[0].name + dealerHand[0].suit + "</div");
+  $("#dealerCards").append("<div class=\"card\"> " + dealerHand[1].name + dealerHand[1].suit + "</div");
+
+  dealerScore = openingValue(dealerHand[0]) + openingValue(dealerHand[1]);
+
+})
 
 });
