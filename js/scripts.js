@@ -24,4 +24,38 @@ function deck(){
 var myDeck = new deck();
 console.log(myDeck);
 
+var dealerHand = new Array();
+var playerHand = new Array();
+
+var playerScore = 0;
+var dealerScore = 0;
+
+document.getElementById("deal").disabled = false;
+document.getElementById("hit").disabled = true;
+document.getElementById("stay").disabled = true;
+
+$("button#deal").click(function () {
+  document.getElementById("hit").disabled = false;
+  document.getElementById("stay").disabled = false;
+
+  firstCard = myDeck[myDeck.length - 1];
+  myDeck.pop();
+  secondCard = myDeck[myDeck.length - 1];
+  myDeck.pop();
+  thirdCard = myDeck[myDeck.length - 1];
+  myDeck.pop();
+  fourthCard = myDeck[myDeck.length - 1];
+  myDeck.pop();
+
+  dealerHand = [firstCard, thirdCard];
+  playerHand = [secondCard, fourthCard];
+
+  $("#dealerCards").html("<div class=\"card\"> " + dealerHand[0].name + dealerHand[0].suit + "</div>");
+  $("#dealerCards").append("<div class=\"card\">  HIDDEN </div>");
+
+  $("#playerCards").html("<div class=\"card\"> " + playerHand[0].name + playerHand[0].suit + "</div>");
+  $("#playerCards").append("<div class=\"card\"> " + playerHand[1].name + playerHand[1].suit + "</div>");
+});
+
+
 });
