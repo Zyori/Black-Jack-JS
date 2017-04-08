@@ -21,6 +21,16 @@ function deck(){
   return cards;
 }
 
+function openingValue(card){
+  if(card.name === "J" ||card.name === "Q"|| card.name === "K" ){
+    return parseInt(10);
+  }else if(card.name === "A"){
+    return parseInt(11);
+  }else{
+    return parseInt(card.name);
+  }
+}
+
 var myDeck = new deck();
 console.log(myDeck);
 
@@ -55,6 +65,10 @@ $("button#deal").click(function () {
 
   $("#playerCards").html("<div class=\"card\"> " + playerHand[0].name + playerHand[0].suit + "</div>");
   $("#playerCards").append("<div class=\"card\"> " + playerHand[1].name + playerHand[1].suit + "</div>");
+
+  playerScore = openingValue(playerHand[0]) + openingValue(playerHand[1]);
+
+  $("#textBar").html("You score is " + playerScore + ". Would you like to hit or stay?");
 });
 
 
