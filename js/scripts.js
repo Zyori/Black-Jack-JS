@@ -71,5 +71,15 @@ $("button#deal").click(function () {
   $("#textBar").html("You score is " + playerScore + ". Would you like to hit or stay?");
 });
 
+$("button#hit").click(function () {
+  nextCard = myDeck[myDeck.length - 1];
+  myDeck.pop();
+
+  playerHand.push(nextCard);
+  console.log(nextCard);
+  $("#playerCards").append("<div class=\"card\"> " + playerHand[playerHand.length - 1].name + playerHand[playerHand.length - 1].suit + "</div");
+
+});
+
 
 });
