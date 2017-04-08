@@ -31,6 +31,14 @@ function openingValue(card){
   }
 }
 
+function isAce(card) {
+  if(card.name === "A"){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 var myDeck = new deck();
 console.log(myDeck);
 
@@ -76,8 +84,12 @@ $("button#hit").click(function () {
   myDeck.pop();
 
   playerHand.push(nextCard);
-  console.log(nextCard);
   $("#playerCards").append("<div class=\"card\"> " + playerHand[playerHand.length - 1].name + playerHand[playerHand.length - 1].suit + "</div");
+
+  aceCount = 0;
+  for(counter=0; counter < playerHand.length; counter++){
+      if(isAce(playerHand[counter])){ aceCount++;}
+  };
 
 });
 
