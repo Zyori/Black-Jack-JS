@@ -121,8 +121,36 @@ $("button#stay").click(function () {
   $("#dealerCards").html("<div class=\"card\"> " + dealerHand[0].name + dealerHand[0].suit + "</div");
   $("#dealerCards").append("<div class=\"card\"> " + dealerHand[1].name + dealerHand[1].suit + "</div");
 
-  dealerScore = openingValue(dealerHand[0]) + openingValue(dealerHand[1]);
+  if(score(dealerHand) > 21){
+    $("#textBar").html("Dealer busts, you win!")
+  }else if(score(dealerHand) == score(playerHand)){
+    $("#textBar").html("Push! It's a tie with score of " + score(dealerHand));
+  }else if(score(dealerHand) >= 17){
+    if(score(dealerHand) > score(playerHand)){
+      $("#textBar").text("Dealer wins with score of " + score(dealerHand));
+    }else{
+      $("#textBar").text("You win with a score of " + score(playerHand));
+    }
+  }else if(score(dealerHand) < 17){
+    while(score(dealerHand) < 17){
+        nextCard = myDeck[myDeck.length - 1];
+        myDeck.pop();
+        dealerHand.push(nextCard);
+        $("#dealerCards").append("<div class=\"card\"> " + dealerHand[dealerHand.length - 1].name + dealerHand[dealerHand.length - 1].suit + "</div");
 
+        if(score(dealerHand) > 21){
+          $("#textBar").html("Dealer busts, you win!")
+        }else if(score(dealerHand) == score(playerHand)){
+          $("#textBar").html("Push! It's a tie with score of " + score(dealerHand));
+        }else if(score(dealerHand) >= 17){
+          if(score(dealerHand) > score(playerHand)){
+            $("#textBar").text("Dealer wins with score of " + score(dealerHand));
+          }else{
+            $("#textBar").text("You win with a score of " + score(playerHand));
+          }
+        }
+    }
+  }
 })
 
 });
