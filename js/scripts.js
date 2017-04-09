@@ -65,6 +65,8 @@ console.log(myDeck);
 var dealerHand = new Array();
 var playerHand = new Array();
 
+  var hitCount = 0;
+
 document.getElementById("deal").disabled = false;
 document.getElementById("hit").disabled = true;
 document.getElementById("stay").disabled = true;
@@ -72,8 +74,6 @@ document.getElementById("stay").disabled = true;
 $("button#deal").click(function () {
   document.getElementById("hit").disabled = false;
   document.getElementById("stay").disabled = false;
-
-  var hitCount = 0;
 
   firstCard = myDeck[myDeck.length - 1];
   myDeck.pop();
@@ -111,6 +111,14 @@ $("button#hit").click(function () {
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
   }
+
+  if(hitCount > 2){
+    $("#textBar").html("You have 5 cards without going over 21! You win!")
+    document.getElementById("hit").disabled = true;
+    document.getElementById("stay").disabled = true;
+  }
+
+  hitCount++;
 
 });
 
