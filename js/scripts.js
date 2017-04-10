@@ -73,7 +73,7 @@ function shuffle(deck){
 }
 
 var myDeck = new deck();
-shuffle(myDeck);
+//shuffle(myDeck);
 console.log(myDeck);
 
 var dealerHand = new Array();
@@ -88,6 +88,9 @@ document.getElementById("stay").disabled = true;
 $("button#deal").click(function () {
   document.getElementById("hit").disabled = false;
   document.getElementById("stay").disabled = false;
+
+  myDeck = new deck();
+  shuffle(myDeck);
 
   hitCount = 0;
 
