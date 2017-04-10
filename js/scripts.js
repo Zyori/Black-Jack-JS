@@ -130,7 +130,7 @@ $("button#hit").click(function () {
 
   hitCount++;
 
-  if(hitCount > 2){
+  if(hitCount > 2 && score(playerHand) <= 21){
     $("#textBar").html("You have 5 cards without going over 21! You win!")
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
