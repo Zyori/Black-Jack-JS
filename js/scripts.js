@@ -59,7 +59,21 @@ function score(hand){
   return score;
 }
 
+function shuffle(deck){
+  var i = 0, j = 0, temp = null;
+
+  for (i = deck.length - 1; i > 0; i -= 1){
+    j = Math.floor(Math.random() * (i + 1));
+    temp = deck[i];
+    deck[i] = deck[j];
+    deck[j] = temp;
+  }
+
+  return
+}
+
 var myDeck = new deck();
+shuffle(myDeck);
 console.log(myDeck);
 
 var dealerHand = new Array();
